@@ -1,5 +1,6 @@
-require "bail/version"
+require 'bail/version'
+require 'bail/dsl'
 
 module Bail
-  # Your code goes here...
+  include Bail::DSL
 end
