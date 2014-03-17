@@ -1,5 +1,7 @@
+require_relative 'dsl/helpers.rb'
+
 module Bail
-  class DSL
-    
+  module DSL
+    include Helpers
   end
 end
