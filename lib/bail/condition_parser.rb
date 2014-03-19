@@ -17,7 +17,6 @@ module Bail
     include Helpers
 
     def make_callable(condition)
-      # Bail.logger.info "condition: #{condition.to_s}"
       if condition.respond_to? :call
         condition
       elsif condition.is_a? Hash

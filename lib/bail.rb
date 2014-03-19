@@ -4,22 +4,32 @@ require 'bail/condition_parser.rb'
 require 'bail/condition_tester.rb'
 
 module Bail
+  class ConditionError < ArgumentError; end
+
   def self.when(*objects, &block)
     # TODO: why is this harcoded as :any?
-    __execute(:any?, block, objects)
+    execute(:any?, block, objects)
   end
 
   def self.when_any(condition, *objects)
-    __execute(:any?, condition, objects)
+    execute(:any?, condition, objects)
+  end
+
+  def self.when_not_any(condition, *objects)
+    execute_not(:any?, condition, objects)
   end
 
   def self.when_all(condition, *objects)
-    __execute(:all?, condition, objects)
+    execute(:all?, condition, objects)
   end
 
-  def self.__execute(type, condition, objects)
-    ConditionTester.new(type).run(ConditionParser.new(condition), objects)
-  rescue ArgumentError => e
+  def self.when_not_all(condition, *objects)
+    execute_not(:all?, condition, objects)
+  end
+
+  def self.harness(&block)
+    yield block
+  rescue Bail::ConditionError => e
     if not Bail.suppress_output
       Bail.logger.warn(e.message)
     end
@@ -29,19 +39,31 @@ module Bail
     end
   end
 
+  def self.execute(type, condition, objects)
+    harness do
+      ConditionTester.new(type).run(ConditionParser.new(condition), objects)
+    end
+  end
+
+  def self.execute_not(type, condition, objects)
+    harness do
+      ConditionTester.new(type).run(ConditionParser.new(condition), objects)
+    end
+  end
+
   module Configuration
     attr_accessor :logger
     attr_accessor :suppress_errors
     attr_accessor :suppress_output
   end
 
-  private_class_method :__execute
+  private_class_method :execute, :harness
 
   extend Configuration
 
   # where the wood goes
   Bail.logger = Logger.new(STDOUT)
-  # Bail.logger.level = Logger::WARN
+  Bail.logger.level = Logger::DEBUG
   Bail.logger.formatter = proc do |severity, datetime, progname, msg|
     "Bail::[#{msg}]\n"
   end

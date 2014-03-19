@@ -4,8 +4,8 @@ require 'bail.rb'
 Bail.suppress_output = true
 
 describe Bail do
-  describe '.when_block' do
-    context 'using a block' do
+  describe '.when' do
+    context 'passing a block as the condition' do
       it 'raises an error when any item is true' do
         expect {
           Bail.when(nil, 3, 3) do |x|
@@ -68,9 +68,31 @@ describe Bail do
     end
   end
 
-  describe '.__execute' do
-    it 'should be private' do
-      expect(Bail.respond_to?(:__execute)).to be_false
+  describe '.when_not_any' do
+    it 'raises an error if anything is true' do
+      expect {
+        Bail.when_not_any(:nil?, nil, 2, nil)
+      }.to raise_error
+    end
+
+    it 'does not raise an error if all items are false' do
+      expect {
+        Bail.when_not_any(:nil?, nil, nil, nil)
+      }.not_to raise_error
+    end
+  end
+
+  describe '.when_not_all' do
+    it 'raises an error if anything is true' do
+      expect {
+        Bail.when_not_all(:nil?, nil, 2, nil)
+      }.to raise_error
+    end
+
+    it 'does not raise an error if all items are false' do
+      expect {
+        Bail.when_not_all(:nil?, nil, nil, nil)
+      }.not_to raise_error
     end
   end
 end

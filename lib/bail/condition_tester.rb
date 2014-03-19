@@ -14,7 +14,7 @@ module Bail
 
     def run(condition_parser, objects)
       if objects.send(type) { |object| condition_parser.test(object) }
-        raise ArgumentError.new('A Bail condition has failed.')
+        raise Bail::ConditionError.new('A Bail condition has failed.')
       end
     end
   end

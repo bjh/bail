@@ -3,6 +3,7 @@ module Bail
   module Helpers
     def questionable(condition)
       # TODO: Object.new.extend(Enumerable).respond_to? condition
+      # WHY: to allow {is_a: Thing}
       condition.to_s.gsub(/\?$/, '').gsub(/$/, '?').to_sym
     end
 
