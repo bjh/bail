@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'bail.rb'
 
+Bail.suppress_output = true
+
 describe Bail do
   describe '.when_block' do
     context 'using a block' do
@@ -65,7 +67,7 @@ describe Bail do
       }.not_to raise_error
     end
   end
-  
+
   describe '.__execute' do
     it 'should be private' do
       expect(Bail.respond_to?(:__execute)).to be_false

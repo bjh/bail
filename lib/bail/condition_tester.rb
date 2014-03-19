@@ -7,13 +7,14 @@ module Bail
     attr_accessor :type
 
     def initialize(type)
-      # :any
+      # can be methods from Enumerable basically
+      #  i.e. :any?, :all?
       @type = questionable(type)
     end
 
     def run(condition_parser, objects)
       if objects.send(type) { |object| condition_parser.test(object) }
-        raise ArgumentError.new('A condition has failed.')
+        raise ArgumentError.new('A Bail condition has failed.')
       end
     end
   end
