@@ -65,13 +65,7 @@ describe Bail do
       }.not_to raise_error
     end
   end
-
-  describe '.__harness' do
-    it 'should be private' do
-      expect(Bail.respond_to?(:__harness)).to be_false
-    end
-  end
-
+  
   describe '.__execute' do
     it 'should be private' do
       expect(Bail.respond_to?(:__execute)).to be_false

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'bail.rb'
 
 describe Bail::Configuration do
-  describe '.catch_errors' do
+  describe '.suppress_errors' do
     context 'when true' do
       before :all do
         Bail.suppress_errors = true
