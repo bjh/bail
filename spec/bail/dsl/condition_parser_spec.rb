@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'bail/dsl/condition_parser.rb'
+require 'bail/condition_parser.rb'
 
-describe Bail::DSL::Helpers do
+describe Bail::Helpers do
   subject { ConditionParser.new(:nil?) }
 
   describe '#' do

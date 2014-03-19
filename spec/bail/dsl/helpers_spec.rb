@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'bail/dsl/helpers.rb'
+require 'bail/helpers.rb'
 
-describe Bail::DSL::Helpers do
-  subject { Object.new.extend(Bail::DSL::Helpers) }
+describe Bail::Helpers do
+  subject { Object.new.extend(Bail::Helpers) }
 
   describe '.questionable' do
     context 'when the condition already has a `?` on the end' do
