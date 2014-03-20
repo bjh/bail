@@ -29,18 +29,6 @@ module Bail
   #   execute(:none?, condition, objects)
   # end
 
-  # def self.harness(&block)
-  #   yield block
-  # rescue Bail::ConditionError => e
-  #   if not Bail.suppress_output
-  #     Bail.logger.warn(e.message)
-  #   end
-  #
-  #   if not Bail.suppress_errors
-  #     raise e
-  #   end
-  # end
-
   def self.execute(type, condition, objects)
     Bail.behavior.run do
       ConditionTester.new(type).run(ConditionParser.new(condition), objects)
@@ -65,7 +53,7 @@ module Bail
     "Bail::[#{msg}]\n"
   end
 
-  # behavior
+  # handle the behavior
   def self.raise_on_error
     @@raise_on_error
   end
@@ -80,6 +68,6 @@ module Bail
     end
   end
 
-  # default to raise errors
+  # default to return true/false
   Bail.raise_on_error = true
 end
