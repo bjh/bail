@@ -68,31 +68,31 @@ describe Bail do
     end
   end
 
-  describe '.when_not_any' do
-    it 'raises an error if anything is true' do
-      expect {
-        Bail.when_not_any(:nil?, nil, 2, nil)
-      }.to raise_error
-    end
-
-    it 'does not raise an error if all items are false' do
-      expect {
-        Bail.when_not_any(:nil?, nil, nil, nil)
-      }.not_to raise_error
-    end
-  end
-
-  describe '.when_not_all' do
-    it 'raises an error if anything is true' do
-      expect {
-        Bail.when_not_all(:nil?, nil, 2, nil)
-      }.to raise_error
-    end
-
-    it 'does not raise an error if all items are false' do
-      expect {
-        Bail.when_not_all(:nil?, nil, nil, nil)
-      }.not_to raise_error
-    end
-  end
+  # describe '.when_one' do
+  #   it 'returns true of exactly one item is true' do
+  #     expect {
+  #       Bail.when_one(:nil?, 1, 2, nil)
+  #     }.to raise_error
+  #   end
+  #
+  #   it 'does not raise an error if all items are false' do
+  #     expect {
+  #       Bail.when_one(:nil?, nil, nil, nil)
+  #     }.not_to raise_error
+  #   end
+  # end
+  #
+  # describe '.when_not_all' do
+  #   it 'raises an error if anything is true' do
+  #     expect {
+  #       Bail.when_not_all(:nil?, nil, 2, nil)
+  #     }.to raise_error
+  #   end
+  #
+  #   it 'does not raise an error if all items are false' do
+  #     expect {
+  #       Bail.when_not_all(:nil?, nil, nil, nil)
+  #     }.not_to raise_error
+  #   end
+  # end
 end

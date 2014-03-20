@@ -12,9 +12,9 @@ describe Bail::Configuration do
         Bail.suppress_errors = false
       end
 
-      it 'does not raise an exception' do
+      it 'suppresses the raise error behavior' do
         expect {
-          Bail.when(nil, 3, 3) do |x|
+          Bail.when(:any, 1, 2, 3, nil) do |x|
             x.nil?
           end
         }.not_to raise_error

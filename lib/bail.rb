@@ -6,26 +6,26 @@ require 'bail/condition_tester.rb'
 module Bail
   class ConditionError < ArgumentError; end
 
-  def self.when(*objects, &block)
-    # TODO: why is this harcoded as :any?
-    execute(:any?, block, objects)
+  # Bail.when :all, [:of, :these] {|item| item.nil?}
+  def self.when(enumerator, *objects, &block)
+    execute(enumerator, block, objects)
   end
 
   def self.when_any(condition, *objects)
     execute(:any?, condition, objects)
   end
 
-  def self.when_not_any(condition, *objects)
-    execute_not(:any?, condition, objects)
-  end
-
   def self.when_all(condition, *objects)
     execute(:all?, condition, objects)
   end
 
-  def self.when_not_all(condition, *objects)
-    execute_not(:all?, condition, objects)
-  end
+  # def self.when_one(condition, *objects)
+  #   execute(:one?, condition, objects)
+  # end
+
+  # def self.when_none(condition, *objects)
+  #   execute(:none?, condition, objects)
+  # end
 
   def self.harness(&block)
     yield block
@@ -40,12 +40,6 @@ module Bail
   end
 
   def self.execute(type, condition, objects)
-    harness do
-      ConditionTester.new(type).run(ConditionParser.new(condition), objects)
-    end
-  end
-
-  def self.execute_not(type, condition, objects)
     harness do
       ConditionTester.new(type).run(ConditionParser.new(condition), objects)
     end
