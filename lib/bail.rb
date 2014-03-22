@@ -1,5 +1,6 @@
 require 'logger'
 require 'bail/version'
+require 'bail/configuration'
 require 'bail/condition_parser.rb'
 require 'bail/condition_tester.rb'
 require 'bail/behavior/raise_behavior.rb'
@@ -8,7 +9,7 @@ require 'bail/behavior/return_behavior.rb'
 module Bail
   class ConditionError < ArgumentError; end
 
-  # Bail.when :all, [:of, :these] {|item| item.nil?}
+  # Bail.when(:all, [:of, :these]) {|item| item.nil?}
   def self.when(enumerator, *objects, &block)
     execute(enumerator, block, objects)
   end
@@ -21,13 +22,13 @@ module Bail
     execute(:all?, condition, objects)
   end
 
-  # def self.when_one(condition, *objects)
-  #   execute(:one?, condition, objects)
-  # end
+  def self.when_one(condition, *objects)
+    execute(:one?, condition, objects)
+  end
 
-  # def self.when_none(condition, *objects)
-  #   execute(:none?, condition, objects)
-  # end
+  def self.when_none(condition, *objects)
+    execute(:none?, condition, objects)
+  end
 
   def self.execute(type, condition, objects)
     Bail.behavior.run do
@@ -36,12 +37,6 @@ module Bail
   end
 
   private_class_method :execute
-
-  module Configuration
-    attr_accessor :logger
-    attr_accessor :suppress_output
-    attr_accessor :behavior
-  end
 
   extend Configuration
 
@@ -52,7 +47,7 @@ module Bail
     "Bail::[#{msg}]\n"
   end
 
-  # handle the behavior
+  # handle the behavior preferences
   def self.raise_on_error
     @@raise_on_error
   end

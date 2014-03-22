@@ -1,5 +1,4 @@
 
-
 module Bail
   class Behavior
   protected
