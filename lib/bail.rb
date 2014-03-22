@@ -2,8 +2,8 @@ require 'logger'
 require 'bail/version'
 require 'bail/condition_parser.rb'
 require 'bail/condition_tester.rb'
-require 'bail/raise_behavior.rb'
-require 'bail/return_behavior.rb'
+require 'bail/behavior/raise_behavior.rb'
+require 'bail/behavior/return_behavior.rb'
 
 module Bail
   class ConditionError < ArgumentError; end
@@ -35,14 +35,13 @@ module Bail
     end
   end
 
+  private_class_method :execute
+
   module Configuration
     attr_accessor :logger
-    # attr_accessor :raise_on_error
     attr_accessor :suppress_output
     attr_accessor :behavior
   end
-
-  private_class_method :execute
 
   extend Configuration
 
