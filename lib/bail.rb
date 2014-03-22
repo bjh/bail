@@ -9,7 +9,7 @@ require 'bail/behavior/return_behavior.rb'
 module Bail
   class ConditionError < ArgumentError; end
 
-  # Bail.when(:all, [:of, :these]) {|item| item.nil?}
+  # Bail.when(:any, :of, :these, :things) {|item| item.nil?}
   def self.when(enumerator, *objects, &block)
     execute(enumerator, block, objects)
   end
