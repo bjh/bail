@@ -1,5 +1,42 @@
 # Bail
 
+#### What
+A miniscule DSL to allow me to write guard clauses.
+
+#### Why
+I was finding my methods were collecting a pile of IF/ELSE tests that got hard to read and maintain.
+
+#### How
+Voodoo magic.
+
+
+***
+
+A basic guard looks something like this: 
+```
+Bail.when(:any, :of, :these, :things) {|item| item.nil?}
+```
+
+So you pass in an enumerator (defaults are the Enumerable module methods)  
+any number of items  
+and a `block` for the condition test
+
+Super *easy* and super *cheezy*.
+
+There are more specialized versions as well that do not require a block:  
+These are really just light wrappers around Enumerable methods...
+
+```
+Bail.when_any(condition, *objects)
+Bail.when_all(condition, *objects)
+Bail.when_one(condition, *objects)
+Bail.when_none(condition, *objects)
+```
+
+#### Why would you care?
+To understand the **why** of this gem you can ask yourself this question:  
+Do I prefer to read this: `[:one, :of, :these, :things].any? {|x| nil?}`  
+or this: `Bail.when_any(:nil, :one, :of, :these, :things)`
 
 ## Installation
 
