@@ -38,6 +38,25 @@ To understand the **why** of this gem you can ask yourself this question:
 Do I prefer to read this: `[:one, :of, :these, :things].any? {|x| nil?}`  
 or this: `Bail.when_any(:nil, :one, :of, :these, :things)`
 
+#### Example Usage
+
+Bail will usually live at the top of your methods.
+
+```
+# Assuming that Bail.raise_on_error = false
+def some_method(that, takes, arguments)
+  return if Bail.when(:nil, that, takes, arguments)
+  return if Bail.when_none({:is_a, String}, that, takes, arguments)
+  
+  # I will use it for type discovery instead of blindly asking it to quack
+  # i.e. I know I want the takes variable to be an Integer but I get it as a String sometimes...
+  if Bail.when_any({:is_a: String}, takes)
+    Logger.debug("you are passing in `takes` to `some_method` as a String from somewhere...")
+    takes = takes.to_i
+  end
+end
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
