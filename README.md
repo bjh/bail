@@ -1,7 +1,7 @@
 # Bail
 
 #### What
-A miniscule DSL to allow me to write guard clauses primarily and also ask some basic questions of my types.
+A miniscule DSL to write guard clauses. Also to ask some basic questions of my types when I get curious.
 
 #### Why
 I was finding my methods were collecting a top layer of IF/ELSE statements that got harder to read and maintain.
