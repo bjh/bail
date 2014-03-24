@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "bail"
   spec.version       = Bail::VERSION
   spec.authors       = ["bjh"]
-  spec.email         = ["brodie.hanbuch@gmail.com"]
+  spec.email         = ["bjh@fake.fake"]
   spec.summary       = %q{Bail out of functions early}
   spec.description   = %q{Bail out of functions early...}
   spec.homepage      = ""
