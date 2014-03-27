@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["bjh@fake.fake"]
   spec.summary       = %q{Bail out of functions early}
   spec.description   = %q{Bail out of functions early...}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/bjh/bail"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
