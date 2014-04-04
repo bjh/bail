@@ -41,7 +41,7 @@ or this:
   Bail.when_any(:nil, :one, :of, :these, :things)
 ```
 
-to be honest I would prefer a fluid approach:
+to be honest I would prefer a fluent approach:
 ```ruby
   Bail.when_any(:one, :of, :these, :things).are(:nil)
 ```
