@@ -12,8 +12,8 @@ Sweet sexy voodoo magic.
 ***
 
 A basic *un-sugared* guard looks something like this:
-```
-Bail.when(:any, :of, :these, :things) {|item| item.nil?}
+```ruby
+  Bail.when(:any, :of, :these, :things) {|item| item.nil?}
 ```
 
 So you pass in an enumerator (defaults are the Enumerable module methods), any number of arguments, and a `block` for the condition test.
@@ -23,11 +23,11 @@ Super *easy* and super *cheezy*.
 There are more specialized versions that do not require a block:  
 These are really just lightly *sugared* wrappers around Enumerable methods...
 
-```
-Bail.when_any(condition, *objects)
-Bail.when_all(condition, *objects)
-Bail.when_one(condition, *objects)
-Bail.when_none(condition, *objects)
+```ruby
+  Bail.when_any(condition, *objects)
+  Bail.when_all(condition, *objects)
+  Bail.when_one(condition, *objects)
+  Bail.when_none(condition, *objects)
 ```
 
 #### Why would you care?
@@ -53,19 +53,19 @@ let's call that version 2.
 
 Bail will usually live at the top of your methods.
 
-```
-# Assuming that Bail.raise_on_error = false
-def some_method(that, takes, arguments)
-  return if Bail.when(:nil, that, takes, arguments)
-  return if Bail.when_none({:is_a, String}, that, takes, arguments)
+```ruby
+  # Assuming that Bail.raise_on_error = false
+  def some_method(that, takes, arguments)
+    return if Bail.when(:nil, that, takes, arguments)
+    return if Bail.when_none({:is_a, String}, that, takes, arguments)
 
-  # I will use it for type discovery instead of blindly asking it to quack
-  # i.e. I know I want the takes variable to be an Integer but I get it as a String sometimes...
-  if Bail.when_any({:is_a: String}, takes)
-    Logger.debug("you are passing in `takes` to `some_method` as a String from somewhere...")
-    takes = takes.to_i
+    # I will use it for type discovery instead of blindly asking it to quack
+    # i.e. I know I want the takes variable to be an Integer but I get it as a String sometimes...
+    if Bail.when_any({:is_a: String}, takes)
+      Logger.debug("you are passing in `takes` to `some_method` as a String from somewhere...")
+      takes = takes.to_i
+    end
   end
-end
 ```
 
 ## Installation
