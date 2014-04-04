@@ -11,7 +11,7 @@ Sweet sexy voodoo magic.
 
 ***
 
-A basic *un-sugared* guard looks something like this: 
+A basic *un-sugared* guard looks something like this:
 ```
 Bail.when(:any, :of, :these, :things) {|item| item.nil?}
 ```
@@ -32,14 +32,22 @@ Bail.when_none(condition, *objects)
 
 #### Why would you care?
 To understand the **why** of this gem you can ask yourself this question:  
-Do I prefer to read this: 
+Do I prefer to read this:
+```ruby
+  [:one, :of, :these, :things].any? {|x| nil?}
 ```
-[:one, :of, :these, :things].any? {|x| nil?}
+or this:
+```ruby
+  Bail.when_any(:nil, :one, :of, :these, :things)
 ```
-or this: 
+
+to be honest I would prefer a fluid approach:
+```ruby
+  Bail.when_any(:one, :of, :these, :things).are(:nil)
 ```
-Bail.when_any(:nil, :one, :of, :these, :things)
-```
+
+let's call that version 2.
+
 
 #### Example Usage
 
@@ -50,7 +58,7 @@ Bail will usually live at the top of your methods.
 def some_method(that, takes, arguments)
   return if Bail.when(:nil, that, takes, arguments)
   return if Bail.when_none({:is_a, String}, that, takes, arguments)
-  
+
   # I will use it for type discovery instead of blindly asking it to quack
   # i.e. I know I want the takes variable to be an Integer but I get it as a String sometimes...
   if Bail.when_any({:is_a: String}, takes)
