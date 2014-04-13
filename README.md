@@ -1,6 +1,7 @@
 # Bail
 
 [![Build Status](https://travis-ci.org/bjh/bail.svg?branch=master)](https://travis-ci.org/bjh/bail)
+[![Gem Version](https://badge.fury.io/rb/bail.svg)](http://badge.fury.io/rb/bail)
 [![Coverage Status](https://coveralls.io/repos/bjh/bail/badge.png?branch=master)](https://coveralls.io/r/bjh/bail?branch=master)
 #### What
 A miniscule DSL to write guard clauses. Also to ask some basic questions of my types when I get curious.
