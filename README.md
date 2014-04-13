@@ -1,5 +1,7 @@
 # Bail
 
+[![Build Status](https://travis-ci.org/bjh/bail.svg?branch=master)](https://travis-ci.org/bjh/bail)
+
 #### What
 A miniscule DSL to write guard clauses. Also to ask some basic questions of my types when I get curious.
 
