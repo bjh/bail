@@ -19,7 +19,7 @@ describe Bail do
 
         expect {
           Bail.when_any(:nil, nil)
-        }.to raise_error
+        }.to raise_error(Bail::ConditionError)
       end
 
       it 'should return a boolean result when false' do
@@ -27,9 +27,9 @@ describe Bail do
 
         expect {
           Bail.when_any(:nil, nil)
-        }.not_to raise_error
+        }.not_to raise_error #(Bail::ConditionError)
 
-        expect(Bail.when_any(:nil, nil)).to be_true
+        expect(Bail.when_any(:nil, nil)).to be true
       end
     end
   end
@@ -37,7 +37,7 @@ describe Bail do
   describe '.when' do
     it 'allows passing in a block as the condition test' do
       r = Bail.when(:none, 1, 2, 3) { |x| x.nil? }
-      expect(r).to be_true
+      expect(r).to be true
     end
   end
 
@@ -48,7 +48,7 @@ describe Bail do
 
         expect {
           Bail.when_any(->(x){x.nil?}, 1, nil, 3)
-        }.to raise_error
+        }.to raise_error(Bail::ConditionError)
       end
     end
 
@@ -58,7 +58,7 @@ describe Bail do
 
         expect {
           Bail.when_any(:nil?, 1, 2, nil)
-        }.to raise_error
+        }.to raise_error(Bail::ConditionError)
       end
 
       it 'does not raise an error when all items are false' do
@@ -71,7 +71,7 @@ describe Bail do
     context 'using a Hash as the condition' do
       it 'allows passing a type constraint along with the condition test' do
         r = Bail.when_any({is_a: String}, 1, 2, '3')
-        expect(r).to be_true
+        expect(r).to be true
       end
     end
   end
@@ -79,32 +79,32 @@ describe Bail do
   describe '.when_all' do
     it 'returns true when all items pass the condition test' do
       r = Bail.when_all(:nil?, nil, nil, nil)
-      expect(r).to be_true
+      expect(r).to be true
     end
 
     it 'returns false if any item fails the condition test' do
       r = Bail.when_all(:nil?, nil, nil, 3)
-      expect(r).to be_false
+      expect(r).to be false
     end
   end
 
   describe '.when_one' do
     it 'returns true if exactly one item is true' do
-      expect(Bail.when_one(:nil?, 1, 2, nil, 4, 5)).to be_true
+      expect(Bail.when_one(:nil?, 1, 2, nil, 4, 5)).to be true
     end
 
     it 'returns false if more than one item is true' do
-      expect(Bail.when_one(:nil?, 1, 2, nil, 4, 5, nil)).to be_false
+      expect(Bail.when_one(:nil?, 1, 2, nil, 4, 5, nil)).to be false
     end
   end
 
   describe '.when_none' do
     it 'returns true if all items FAIL the test' do
-      expect(Bail.when_none(:nil?, 1, 2, 4, 5)).to be_true
+      expect(Bail.when_none(:nil?, 1, 2, 4, 5)).to be true
     end
 
     it 'returns true if one or more items PASS the test' do
-      expect(Bail.when_none(:nil?, 1, 2, nil, 4, 5)).to be_false
+      expect(Bail.when_none(:nil?, 1, 2, nil, 4, 5)).to be false
     end
   end
 end
