@@ -1,6 +1,7 @@
 
 module Bail
   module Helpers
+    # NOTE: should be called questionize ?
     def questionable(condition)
       # TODO: Object.new.extend(Enumerable).respond_to? condition
       # WHY: to allow {is_a: Thing} which becomes - [...].is_a? Thing
